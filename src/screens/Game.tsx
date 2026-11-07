@@ -111,7 +111,7 @@ export function Game({
         <div className="appbar__grow">
           <span className="appbar__title">{session.title}</span>
           <span className="appbar__meta">
-            {session.players.length} players · {played} of {total} rounds
+            {session.players.length} players · {played}/{total}
           </span>
         </div>
         <nav className="header-tabs" aria-label="Game views">

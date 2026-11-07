@@ -137,14 +137,14 @@ svg {
 
 .brand__word {
   font-family: var(--font-display);
-  font-size: 1.4375rem;
+  font-size: 1.5625rem;
   line-height: 1;
   letter-spacing: -0.005em;
 }
 
 .appbar__title {
   font-family: var(--font-display);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -1871,6 +1871,20 @@ svg {
 }
 
 /* ── Breakpoints ──────────────────────────────────────────── */
+@media (max-width: 30rem) {
+  .roundhead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  .roundhead__aside {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-sm);
+    text-align: start;
+  }
+}
+
 @media (max-width: 26rem) {
   :root {
     --gutter: 0.875rem;

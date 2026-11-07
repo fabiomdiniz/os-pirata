@@ -105,7 +105,7 @@ export function Setup({
         <img className="brand__logo brand__logo--solo" src="/icon-192.png" alt="" width={24} height={24} />
         <div className="appbar__grow">
           <span className="appbar__title">New game</span>
-          <span className="appbar__meta">Step {step + 1} of 3 · {STEP_TITLES[step]}</span>
+          <span className="appbar__meta">Step {step + 1} of 3</span>
         </div>
       </header>
 

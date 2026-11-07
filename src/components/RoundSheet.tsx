@@ -286,7 +286,7 @@ export function RoundSheet({
             ) : (
               <div className="override-row">
                 <span className="tiny">
-                  {hasOverride ? `Admin set ${signed(points)} for this round` : 'Computed from the rules in play'}
+                  {hasOverride ? `Admin set ${signed(points)} this round` : 'From the rules in play'}
                 </span>
                 {hasOverride ? (
                   <button type="button" className="linkish" onClick={() => setOverride(player.id, null)}>
