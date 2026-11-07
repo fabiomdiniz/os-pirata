@@ -22,10 +22,6 @@ export function RoundSheet({
   onDelete?: () => void;
 }) {
   const [draft, setDraft] = useState<Round>(() => structuredClone(round));
-  const [touched, setTouched] = useState<Record<string, boolean>>(() => {
-    if (!isNew) return Object.fromEntries(session.players.map((player) => [player.id, true]));
-    return {};
-  });
   const [openBonuses, setOpenBonuses] = useState<Record<string, boolean>>({});
   const [overrideFor, setOverrideFor] = useState<string | null>(null);
   const [overrideValue, setOverrideValue] = useState('');
@@ -40,10 +36,7 @@ export function RoundSheet({
     return needs === 'base' || session.deck[needs];
   });
 
-  const markTouched = (playerId: string) => setTouched((current) => ({ ...current, [playerId]: true }));
-
   const updateEntry = (playerId: string, patch: Partial<Round['entries'][string]>) => {
-    markTouched(playerId);
     setDraft((current) => ({
       ...current,
       entries: {
@@ -54,7 +47,6 @@ export function RoundSheet({
   };
 
   const bumpEntry = (playerId: string, field: 'bid' | 'tricks', delta: number) => {
-    markTouched(playerId);
     setDraft((current) => {
       const entry = current.entries[playerId];
       const next = Math.max(0, Math.min(current.cards, entry[field] + delta));
@@ -66,7 +58,6 @@ export function RoundSheet({
   };
 
   const bumpBonus = (playerId: string, key: BonusKey, delta: number) => {
-    markTouched(playerId);
     setDraft((current) => {
       const entry = current.entries[playerId];
       const value = Math.max(0, Math.min(9, (entry.bonuses[key] ?? 0) + delta));
@@ -80,7 +71,6 @@ export function RoundSheet({
   };
 
   const setOverride = (playerId: string, value: number | null) => {
-    markTouched(playerId);
     setDraft((current) => {
       const overrides = { ...current.overrides };
       if (value === null) delete overrides[playerId];
@@ -116,10 +106,8 @@ export function RoundSheet({
   });
 
   const leader = roundLeader(session, index);
-  const roundTotal = preview.reduce((sum, row) => (touched[row.player.id] ? sum + row.points : sum), 0);
+  const roundTotal = preview.reduce((sum, row) => sum + row.points, 0);
   const tricksSum = preview.reduce((sum, row) => sum + row.entry.tricks, 0);
-  const entered = preview.filter((row) => touched[row.player.id]).length;
-  const allEntered = entered === preview.length;
 
   return (
     <Sheet
@@ -128,13 +116,10 @@ export function RoundSheet({
       onClose={onClose}
       footer={
         <>
-          <span className="sheet__foot-note num">
-            {allEntered ? `${signed(roundTotal)} pts` : `${entered} of ${preview.length} entered`}
-          </span>
+          <span className="sheet__foot-note num">{signed(roundTotal)} pts</span>
           <button
             type="button"
             className="btn btn--primary"
-            disabled={!allEntered}
             onClick={() => {
               onSave(draft);
               onClose();
@@ -162,7 +147,6 @@ export function RoundSheet({
 
       {preview.map(({ player, entry, points, hasOverride, scored }, playerIndex) => {
         const bonusCount = Object.values(entry.bonuses).reduce((sum, value) => sum + (value ?? 0), 0);
-        const rowTouched = touched[player.id] ?? false;
         const exact = entry.bid === entry.tricks;
         const isOpen = openBonuses[player.id] ?? false;
         return (
@@ -171,9 +155,7 @@ export function RoundSheet({
               <span className="dot dot--sm" style={{ '--dot': playerColor(playerIndex) } as CSSProperties} />
               <span className="entry__name">{player.name}</span>
               {hasOverride ? <span className="tag tag--brass">override</span> : null}
-              <span className={`entry__pts num ${touched[player.id] ? deltaClass(points) : 'delta-nil'}`}>
-                {touched[player.id] ? signed(points) : '—'}
-              </span>
+              <span className={`entry__pts num ${deltaClass(points)}`}>{signed(points)}</span>
             </header>
 
             <div className="entry__grid">
@@ -304,11 +286,7 @@ export function RoundSheet({
             ) : (
               <div className="override-row">
                 <span className="tiny">
-                  {!rowTouched
-                    ? 'Not entered yet'
-                    : hasOverride
-                      ? `Admin set ${signed(points)} for this round`
-                      : 'Computed from the rules in play'}
+                  {hasOverride ? `Admin set ${signed(points)} for this round` : 'Computed from the rules in play'}
                 </span>
                 {hasOverride ? (
                   <button type="button" className="linkish" onClick={() => setOverride(player.id, null)}>
