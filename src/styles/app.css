@@ -137,14 +137,14 @@ svg {
 
 .brand__word {
   font-family: var(--font-display);
-  font-size: 1.3125rem;
+  font-size: 1.4375rem;
   line-height: 1;
   letter-spacing: -0.005em;
 }
 
 .appbar__title {
   font-family: var(--font-display);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -154,8 +154,12 @@ svg {
 
 .appbar__meta {
   display: block;
+  max-width: 100%;
+  overflow: hidden;
   font-family: var(--font-ui);
   font-size: var(--text-2xs);
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1228,7 +1232,7 @@ svg {
 
 .chart text {
   font-family: var(--font-ui);
-  font-size: 9px;
+  font-size: 10px;
   fill: var(--text-4);
   font-variant-numeric: tabular-nums;
 }
@@ -1616,7 +1620,7 @@ svg {
   border-radius: var(--radius-xs);
   background: none;
   color: var(--text-2);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
   transition:
@@ -1718,7 +1722,7 @@ svg {
   border: 0;
   background: none;
   color: var(--text-3);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   cursor: pointer;
 }
 
