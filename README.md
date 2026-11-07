@@ -15,6 +15,8 @@ leaves the device.
   cards — extra 7s/8s/0-14s, the wild 15, Mary Thorne, the first mate, kraken, white whale, spotted
   stingray, Davy Jones' locker, walk the plank, the last volley and loot. The round sheet only asks
   for bonuses that are actually in play.
+- **First lead.** Pick who starts; the lead rotates one seat clockwise every round, and the table,
+  the round sheet and the round log all say who leads that round.
 - **Round entry.** Bid and tricks per player, bonus counters for every scoring card, an Rascal of
   Roatan wager, plus a trick tally so you can see a round that doesn't add up.
 - **Admin overrides.** Override any player's points for a single round, or adjust a final total in

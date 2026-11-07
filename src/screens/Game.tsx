@@ -7,6 +7,7 @@ import {
   cryptoId,
   deckSize,
   isSessionComplete,
+  roundLeader,
   roundsTotal,
   scoreRound,
   standings,
@@ -59,6 +60,8 @@ export function Game({
   );
   const idToIndex = new Map(session.players.map((player, index) => [player.id, index]));
   const hasRoundOverrides = session.rounds.some((round) => Object.keys(round.overrides).length > 0);
+  const currentLeader = complete ? undefined : roundLeader(session, played);
+  const firstLeader = roundLeader(session, 0);
 
   const series: ChartSeries[] = session.players.map((player, index) => {
     let running = 0;
@@ -139,6 +142,12 @@ export function Game({
               <h1 className="roundhead__title">
                 {complete ? 'As it stands' : `${cardsLabel(nextCards)} each`}
               </h1>
+              {currentLeader ? (
+                <p className="roundhead__lead">
+                  <span className="dot dot--sm" style={{ '--dot': playerColor(idToIndex.get(currentLeader.id) ?? 0) } as CSSProperties} />
+                  {currentLeader.name} leads the first trick
+                </p>
+              ) : null}
             </div>
             <div className="roundhead__aside">
               <span className="tag">{session.rules.scoring === 'rascal' ? 'Rascal' : 'Standard'}</span>
@@ -214,6 +223,10 @@ export function Game({
                 <span className="tag">{cardsLabel(nextCards)}</span>
               </div>
               <div className="rail">
+                <div className="kv">
+                  <span className="kv__k">Leads</span>
+                  <span className="kv__v">{currentLeader?.name ?? '—'}</span>
+                </div>
                 <div className="kv">
                   <span className="kv__k">Cards each</span>
                   <span className="kv__v num">{nextCards}</span>
@@ -323,7 +336,9 @@ export function Game({
                   <article className="logentry" key={round.id}>
                     <header className="logentry__head">
                       <h3 className="logentry__title">Round {index + 1}</h3>
-                      <span className="logentry__cards num">{cardsLabel(round.cards)}</span>
+                      <span className="logentry__cards num">
+                        {cardsLabel(round.cards)} · {roundLeader(session, index)?.name ?? '—'} led
+                      </span>
                       <button
                         type="button"
                         className="btn btn--ghost btn--sm logentry__edit"
@@ -400,6 +415,27 @@ export function Game({
                   </div>
                 ))}
               </div>
+              <div className="block__head" style={{ marginTop: '0.35rem' }}>
+                <h3 className="block__note">Round 1 lead</h3>
+                <span className="block__note">rotates clockwise</span>
+              </div>
+              <div className="chips" role="group" aria-label="First leader">
+                {session.players.map((player, index) => (
+                  <button
+                    key={player.id}
+                    type="button"
+                    className="chip"
+                    aria-pressed={firstLeader?.id === player.id}
+                    onClick={() => onUpdate((s) => ({ ...s, firstLeaderId: player.id }))}
+                  >
+                    <span className="dot dot--sm" style={{ '--dot': playerColor(index) } as CSSProperties} />
+                    {player.name}
+                  </button>
+                ))}
+              </div>
+              {played > 0 ? (
+                <p className="tiny">Changing this shifts the lead on every round already logged.</p>
+              ) : null}
               {played === 0 && session.players.length < 9 ? (
                 <button
                   type="button"

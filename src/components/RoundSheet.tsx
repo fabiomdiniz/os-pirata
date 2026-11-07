@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { BonusKey, Round, Session } from '../lib/types';
-import { BONUS_META, BONUS_ORDER, scoreEntry } from '../lib/rules';
+import { BONUS_META, BONUS_ORDER, roundLeader, scoreEntry } from '../lib/rules';
 import { cardsLabel, deltaClass, playerColor, signed } from '../lib/format';
 import { Counter, Icon, Sheet, Stepper } from './ui';
 
@@ -115,6 +115,7 @@ export function RoundSheet({
     };
   });
 
+  const leader = roundLeader(session, index);
   const roundTotal = preview.reduce((sum, row) => (touched[row.player.id] ? sum + row.points : sum), 0);
   const tricksSum = preview.reduce((sum, row) => sum + row.entry.tricks, 0);
   const entered = preview.filter((row) => touched[row.player.id]).length;
@@ -123,7 +124,7 @@ export function RoundSheet({
   return (
     <Sheet
       title={`Round ${index + 1}`}
-      sub={`${cardsLabel(draft.cards)} each · ${session.players.length} players`}
+      sub={`${cardsLabel(draft.cards)} each · ${leader?.name ?? '—'} leads`}
       onClose={onClose}
       footer={
         <>

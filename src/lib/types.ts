@@ -62,6 +62,8 @@ export type Session = {
   updatedAt: number;
   status: 'live' | 'done';
   players: Player[];
+  /** Player id who leads (and deals) the first round; the lead rotates clockwise after that. */
+  firstLeaderId: string;
   rules: Rules;
   deck: DeckConfig;
   /** Cards dealt to each player, round by round. Length = number of rounds. */

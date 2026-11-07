@@ -310,6 +310,14 @@ export function standings(session: Session): Standings[] {
   return rows.sort((a, b) => b.total - a.total);
 }
 
+/** Who leads a given round: the first leader, then clockwise round by round. */
+export function roundLeader(session: Session, roundIndex: number): Session['players'][number] | undefined {
+  const { players } = session;
+  if (players.length === 0) return undefined;
+  const start = Math.max(0, players.findIndex((player) => player.id === session.firstLeaderId));
+  return players[(start + roundIndex) % players.length];
+}
+
 export function roundsTotal(session: Session): number {
   return session.schedule.length;
 }

@@ -1101,6 +1101,15 @@ svg {
   letter-spacing: -0.01em;
 }
 
+.roundhead__lead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-2xs);
+  font-size: var(--text-xs);
+  color: var(--text-3);
+}
+
 .roundhead__aside {
   display: flex;
   flex-direction: column;
@@ -1295,9 +1304,12 @@ svg {
 }
 
 .logentry__cards {
+  min-width: 0;
+  overflow: hidden;
   font-size: var(--text-xs);
   color: var(--text-4);
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .logentry__edit {
@@ -1384,12 +1396,18 @@ svg {
   border-bottom: 1px solid var(--rule-soft);
 }
 
+.adjust-row__name .tiny {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .adjust-row__name {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
-  font-size: var(--text-sm);
   min-width: 0;
+  font-size: var(--text-sm);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

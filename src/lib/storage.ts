@@ -43,12 +43,14 @@ export function createSession(input: {
   rules: Rules;
   deck: DeckConfig;
   schedule: number[] | null;
+  firstLeaderIndex?: number;
 }): Session {
   const players = input.players.map((name, index) => ({
     id: `p${index + 1}-${cryptoId().slice(0, 6)}`,
     name: name.trim(),
   }));
   const schedule = input.schedule ?? defaultSchedule(10, players.length, input.deck);
+  const leaderIndex = Math.min(Math.max(0, input.firstLeaderIndex ?? 0), players.length - 1);
   return {
     id: cryptoId(),
     title: input.title.trim() || 'Untitled voyage',
@@ -56,6 +58,7 @@ export function createSession(input: {
     updatedAt: Date.now(),
     status: 'live',
     players,
+    firstLeaderId: players[leaderIndex]?.id ?? '',
     rules: { ...input.rules },
     deck: { ...input.deck },
     schedule,

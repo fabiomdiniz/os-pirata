@@ -31,6 +31,7 @@ export function Setup({
     rules: Rules;
     deck: DeckConfig;
     schedule: number[] | null;
+    firstLeaderIndex: number;
   }) => void;
 }) {
   const [step, setStep] = useState(0);
@@ -38,10 +39,16 @@ export function Setup({
   const [names, setNames] = useState<string[]>(['', '']);
   const [rules, setRules] = useState<Rules>(DEFAULT_RULES);
   const [deck, setDeck] = useState<DeckConfig>(DEFAULT_DECK);
+  const [leaderIndex, setLeaderIndex] = useState(0);
   const [plan, setPlan] = useState<{ key: string; cards: number[] | null }>({ key: 'classic', cards: null });
   const [error, setError] = useState('');
 
   const crewCount = Math.max(2, names.length);
+  const safeLeader = Math.min(leaderIndex, names.length - 1);
+  const leaderName = (offset: number) => {
+    const name = names[(safeLeader + offset) % Math.max(1, names.length)]?.trim();
+    return name || `Player ${((safeLeader + offset) % names.length) + 1}`;
+  };
   const schedule = useMemo(
     () => plan.cards ?? defaultSchedule(10, crewCount, deck),
     [plan, crewCount, deck],
@@ -60,7 +67,14 @@ export function Setup({
       setStep(step + 1);
       return;
     }
-    onCreate({ title, players: names.map((name) => name.trim()), rules, deck, schedule });
+    onCreate({
+      title,
+      players: names.map((name) => name.trim()),
+      rules,
+      deck,
+      schedule,
+      firstLeaderIndex: safeLeader,
+    });
   };
 
   const back = () => {
@@ -155,6 +169,29 @@ export function Setup({
                 </button>
               </div>
               {error ? <p className="notice notice--warn">{error}</p> : null}
+            </div>
+
+            <div className="block">
+              <div className="block__head">
+                <h2 className="block__title">Who leads first</h2>
+                <span className="block__note">round 1</span>
+              </div>
+              <div className="chips" role="group" aria-label="First leader">
+                {names.map((name, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className="chip"
+                    aria-pressed={safeLeader === index}
+                    disabled={!name.trim()}
+                    onClick={() => setLeaderIndex(index)}
+                  >
+                    <span className="dot dot--sm" style={{ '--dot': playerColor(index) } as CSSProperties} />
+                    {name.trim() || `Player ${index + 1}`}
+                  </button>
+                ))}
+              </div>
+              <p className="field__hint">The lead moves one seat clockwise every round.</p>
             </div>
 
             <label className="field">
@@ -322,6 +359,7 @@ export function Setup({
                     <div className="adjust-row" key={index}>
                       <span className="adjust-row__name">
                         Round {index + 1}
+                        <span className="tiny">{leaderName(index)} leads</span>
                       </span>
                       <Counter
                         label={`round ${index + 1} cards`}
