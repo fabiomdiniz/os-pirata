@@ -1,0 +1,92 @@
+/* Hallmark · macrostructure: Workbench · tone: utilitarian nautical · anchor hue: brass 78°
+ * theme: custom (vibe: "ledger under a deck lamp" · paper oklch(17% 0.018 235) · accent oklch(80% 0.13 78) brass · Gloock + Archivo)
+ * genre: atmospheric · mobile-first · pre-emit critique: P5 H5 E5 S4 R5 V4
+ */
+:root {
+  /* ── Colour ─────────────────────────────────────────────── */
+  --paper: oklch(17% 0.018 235);
+  --paper-2: oklch(21% 0.019 235);
+  --paper-3: oklch(25.5% 0.021 235);
+  --paper-4: oklch(30% 0.022 235);
+  --paper-sunk: oklch(13.5% 0.017 235);
+  --rule: oklch(32% 0.018 235);
+  --rule-soft: oklch(26% 0.016 235);
+  --rule-strong: oklch(46% 0.022 235);
+  --text: oklch(94% 0.012 90);
+  --text-2: oklch(80% 0.012 235);
+  --text-3: oklch(66% 0.014 235);
+  --text-4: oklch(55% 0.014 235);
+  --brass: oklch(80% 0.13 78);
+  --brass-soft: oklch(64% 0.1 78);
+  --brass-wash: oklch(80% 0.13 78 / 0.12);
+  --on-brass: oklch(21% 0.035 78);
+  --green: oklch(80% 0.13 158);
+  --red: oklch(72% 0.16 25);
+  --blue: oklch(78% 0.1 235);
+  --focus: oklch(85% 0.13 78);
+  --paper-veil: oklch(17% 0.018 235 / 0.86);
+  --paper-sunk-veil: oklch(13.5% 0.017 235 / 0.72);
+  --scrim: oklch(9% 0.015 235 / 0.72);
+  --red-wash: oklch(72% 0.16 25 / 0.1);
+  --green-wash: oklch(80% 0.13 158 / 0.1);
+  --brass-hover: oklch(86% 0.13 78);
+  --brass-glow: oklch(40% 0.06 78 / 0.14);
+  --dot-ring: oklch(50% 0.02 235 / 0.18);
+  --warn-rule: oklch(72% 0.16 25 / 0.35);
+
+  /* player marks */
+  --p1: oklch(80% 0.13 78);
+  --p2: oklch(79% 0.12 165);
+  --p3: oklch(76% 0.15 28);
+  --p4: oklch(78% 0.11 245);
+  --p5: oklch(78% 0.12 305);
+  --p6: oklch(84% 0.09 95);
+  --p7: oklch(80% 0.11 195);
+  --p8: oklch(76% 0.13 350);
+  --p9: oklch(72% 0.1 130);
+
+  /* ── Type ───────────────────────────────────────────────── */
+  --font-display: 'Gloock', 'Iowan Old Style', Georgia, serif;
+  --font-ui: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.25rem;
+  --text-display: clamp(2rem, 7vw, 2.875rem);
+
+  /* ── Space (4pt) ────────────────────────────────────────── */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* ── Shape & motion ─────────────────────────────────────── */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  --shadow-lift: 0 12px 32px oklch(6% 0.02 235 / 0.55);
+  --shadow-sheet: 0 -18px 60px oklch(5% 0.02 235 / 0.7);
+  --header-h: 3.5rem;
+  --tabbar-h: 3.75rem;
+  --shell: 62rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+}
