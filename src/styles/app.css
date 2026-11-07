@@ -476,16 +476,9 @@ svg {
 
 .masthead__logo {
   display: block;
-  width: clamp(12.5rem, 58vw, 21rem);
+  width: 100%;
+  max-width: 30rem;
   height: auto;
-  margin-inline-start: calc(var(--space-xs) * -1);
-}
-
-@media (min-width: 60rem) {
-  .masthead__logo {
-    width: 100%;
-    max-width: 30rem;
-  }
 }
 
 .masthead__actions {
