@@ -104,6 +104,7 @@ export function Game({
         <button type="button" className="icon-btn" onClick={onHome} aria-label="All games">
           <Icon name="back" size={18} />
         </button>
+        <img className="brand__logo brand__logo--solo" src="/icon-192.png" alt="" width={24} height={24} />
         <div className="appbar__grow">
           <span className="appbar__title">{session.title}</span>
           <span className="appbar__meta">

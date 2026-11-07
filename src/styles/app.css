@@ -121,11 +121,18 @@ svg {
   white-space: nowrap;
 }
 
-.brand__mark {
-  width: 1.125rem;
-  height: 1.125rem;
-  color: var(--brass);
+.brand__logo {
+  width: 1.75rem;
+  height: 1.75rem;
   flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.brand__logo--solo {
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 0.92;
 }
 
 .brand__word {
@@ -133,16 +140,6 @@ svg {
   font-size: 1.3125rem;
   line-height: 1;
   letter-spacing: -0.005em;
-}
-
-.brand__sub {
-  font-size: var(--text-2xs);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-4);
-  padding-inline-start: var(--space-xs);
-  border-inline-start: 1px solid var(--rule);
 }
 
 .appbar__title {
@@ -477,8 +474,18 @@ svg {
   font-weight: 600;
 }
 
-.masthead__title {
-  max-width: 14ch;
+.masthead__logo {
+  display: block;
+  width: clamp(12.5rem, 58vw, 21rem);
+  height: auto;
+  margin-inline-start: calc(var(--space-xs) * -1);
+}
+
+@media (min-width: 60rem) {
+  .masthead__logo {
+    width: 100%;
+    max-width: 30rem;
+  }
 }
 
 .masthead__actions {
@@ -1852,9 +1859,6 @@ svg {
 @media (max-width: 26rem) {
   :root {
     --gutter: 0.875rem;
-  }
-  .brand__sub {
-    display: none;
   }
   .appbar__title {
     font-size: 1rem;

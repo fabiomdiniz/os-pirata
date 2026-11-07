@@ -19,9 +19,8 @@ export function Home({
     <>
       <header className="appbar">
         <span className="brand">
-          <Icon name="mark" size={18} className="brand__mark" />
-          <span className="brand__word">os-pirata</span>
-          <span className="brand__sub">Skull King</span>
+          <img className="brand__logo" src="/icon-192.png" alt="" width={26} height={26} />
+          <span className="brand__word">Os Pirata</span>
         </span>
         <button type="button" className="btn btn--primary btn--sm" onClick={onNew}>
           <Icon name="plus" size={13} strokeWidth={2.2} />
@@ -32,11 +31,7 @@ export function Home({
       <main className="page">
         <section className="masthead">
           <div className="masthead__copy">
-            <h1 className="display masthead__title">Every trick, accounted for.</h1>
-            <p className="lede">
-              Score a night of Skull King without the paper pad. Set the rules your table plays, log each round, and
-              let the ledger do the arithmetic.
-            </p>
+            <img className="masthead__logo" src="/logo.webp" alt="Os Pirata" width={1200} height={654} />
           </div>
           <aside className="masthead__aside">
             <p className="kicker">House maths</p>

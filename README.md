@@ -1,4 +1,4 @@
-# os-pirata
+# Os Pirata
 
 A round-by-round scorekeeper for **Skull King** (Grandpa Beck's Games). Set the rules your table
 actually plays, log bids, tricks and bonuses each round, and let the ledger do the arithmetic.
