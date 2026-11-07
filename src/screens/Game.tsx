@@ -58,6 +58,7 @@ export function Game({
     [lastRound, session.rules],
   );
   const idToIndex = new Map(session.players.map((player, index) => [player.id, index]));
+  const hasRoundOverrides = session.rounds.some((round) => Object.keys(round.overrides).length > 0);
 
   const series: ChartSeries[] = session.players.map((player, index) => {
     let running = 0;
@@ -354,7 +355,7 @@ export function Game({
                 );
               })
             )}
-            <p className="tiny">* points set by hand</p>
+            {hasRoundOverrides ? <p className="tiny">* points set by hand</p> : null}
           </section>
         </main>
       ) : null}

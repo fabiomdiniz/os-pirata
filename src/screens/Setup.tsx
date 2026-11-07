@@ -253,7 +253,7 @@ export function Setup({
                     className="chip"
                     aria-pressed={deck[item.key]}
                     title={item.note}
-                    onClick={() => setDeck({ ...deck, [item.key]: !deck[item.key] })}
+                    onClick={() => setDeck((current) => ({ ...current, [item.key]: !current[item.key] }))}
                   >
                     {deck[item.key] ? (
                       <Icon name="check" size={11} strokeWidth={2.4} />

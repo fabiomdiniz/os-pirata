@@ -1778,7 +1778,7 @@ svg {
 .toast {
   position: fixed;
   inset-inline: 0;
-  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--space-md));
+  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 5rem);
   z-index: 90;
   display: flex;
   justify-content: center;
